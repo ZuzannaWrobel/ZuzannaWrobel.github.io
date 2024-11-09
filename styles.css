@@ -61,6 +61,21 @@ section {
   padding: 2em;
 }
 
+.cv-button {
+  display: inline-block;
+  padding: 0.8em 1.5em;
+  background-color: #333333;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.cv-button:hover {
+  background-color: #555555;
+}
+
 h2 {
   color: #333333; /* Darker header color */
   margin-bottom: 1em;
