@@ -1,75 +1,81 @@
-const canvas = document.getElementById('neural-network-canvas');
-const ctx = canvas.getContext('2d');
-
-let width, height;
-const particles = [];
-
-function resizeCanvas() {
-  width = canvas.width = window.innerWidth;
-  height = canvas.height = window.innerHeight;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-function Particle(x, y) {
-  this.x = x;
-  this.y = y;
-  this.radius = 1.5;
-  this.dx = (Math.random() - 0.5) * 1;
-  this.dy = (Math.random() - 0.5) * 1;
-
-  this.draw = function() {
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-    ctx.fillStyle = '#000000'; // Black particles
-    ctx.fill();
-  };
-
-  this.update = function() {
-    if (this.x < 0 || this.x > width) this.dx *= -1;
-    if (this.y < 0 || this.y > height) this.dy *= -1;
-    this.x += this.dx;
-    this.y += this.dy;
-  };
+body {
+  font-family: Arial, sans-serif;
+  background-color: #ffffff; /* White background */
+  color: #000000; /* Black text color */
 }
 
-function initParticles() {
-  particles.length = 0;
-  for (let i = 0; i < 80; i++) {
-    particles.push(new Particle(Math.random() * width, Math.random() * height));
-  }
+header {
+  text-align: center;
+  padding: 2em;
+  position: relative;
+  background-color: #f4f4f9;
+  border-bottom: 2px solid #e0e0e0;
 }
 
-function connectParticles() {
-  for (let i = 0; i < particles.length; i++) {
-    for (let j = i + 1; j < particles.length; j++) {
-      const dx = particles[i].x - particles[j].x;
-      const dy = particles[i].y - particles[j].y;
-      const distance = Math.sqrt(dx * dx + dy * dy);
-      if (distance < 100) {
-        ctx.beginPath();
-        ctx.moveTo(particles[i].x, particles[i].y);
-        ctx.lineTo(particles[j].x, particles[j].y);
-        ctx.strokeStyle = `rgba(0, 0, 0, ${1 - distance / 100})`; // Black lines
-        ctx.stroke();
-      }
-    }
-  }
+.profile-photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  border: 3px solid #000000;
 }
 
-function animate() {
-  ctx.clearRect(0, 0, width, height);
-  particles.forEach(p => {
-    p.update();
-    p.draw();
-  });
-  connectParticles();
-  requestAnimationFrame(animate);
+h1 {
+  margin-top: 1em;
+  color: #333;
 }
 
-window.addEventListener('resize', () => {
-  resizeCanvas();
-  initParticles();
-});
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+  padding: 1em;
+  background-color: #f8f8f8;
+  border-bottom: 1px solid #e0e0e0;
+}
 
-resizeCanvas();
-initParticles();
-animate();
+nav a {
+  color: #333;
+  font-weight: bold;
+  padding: 0.5em 1em;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+nav a:hover {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+section {
+  padding: 2em;
+}
+
+h2 {
+  color: #333333; /* Darker header color */
+  margin-bottom: 1em;
+}
+
+.project {
+  margin-top: 1em;
+  padding: 1em;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+#neural-network-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+}
