@@ -1,4 +1,3 @@
-// script.js
 const canvas = document.getElementById('neural-network-canvas');
 const ctx = canvas.getContext('2d');
 
@@ -20,7 +19,7 @@ function Particle(x, y) {
   this.draw = function() {
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-    ctx.fillStyle = '#9df9ef';
+    ctx.fillStyle = '#000000'; // Black particles
     ctx.fill();
   };
 
@@ -49,7 +48,7 @@ function connectParticles() {
         ctx.beginPath();
         ctx.moveTo(particles[i].x, particles[i].y);
         ctx.lineTo(particles[j].x, particles[j].y);
-        ctx.strokeStyle = `rgba(157, 249, 239, ${1 - distance / 100})`;
+        ctx.strokeStyle = `rgba(0, 0, 0, ${1 - distance / 100})`; // Black lines
         ctx.stroke();
       }
     }
